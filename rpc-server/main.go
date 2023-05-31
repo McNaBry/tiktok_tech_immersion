@@ -11,13 +11,13 @@ import (
 )
 
 var (
-	rdb = &RedisClient{}
+	RedisDB = &RedisClient{}
 )
 
 func main() {
 	ctx := context.Background()
 
-	err := rdb.ConnectToRedis(ctx, "redis:6379", "")
+	err := RedisDB.ConnectToRedis(ctx, "redis:6379", "")
 	if err != nil {
 		log.Fatal("Initialization of Redis client failed: %v", err)
 	}

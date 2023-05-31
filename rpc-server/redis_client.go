@@ -47,6 +47,9 @@ func (c *RedisClient) ConnectToRedis(ctx context.Context, address string, passwo
 	return nil
 }
 
+// Each message has a roomID which is set to be the senders (e.g: a1:a2)
+// Messages with the same roomID will be grouped into a list with the roomID as the key
+// Using ZAdd, Redis will order these messages by their timestamp, giving us an efficient way to retrieve them
 func (c *RedisClient) RedisSaveMessage(ctx context.Context, roomID string, message *Message) error {
 	log.Printf("Saving message to %v", roomID)
 	// Get JSON representation of message
@@ -57,7 +60,7 @@ func (c *RedisClient) RedisSaveMessage(ctx context.Context, roomID string, messa
 
 	// Member to be added to the list
 	member := &redis.Z{
-		Score:  message.Timestamp, // Sort key for ZADD
+		Score:  float64(message.Timestamp), // Sort key for ZADD
 		Member: text,
 	}
 
