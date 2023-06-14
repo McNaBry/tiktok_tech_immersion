@@ -14,7 +14,7 @@ redis:
       - "6379:6379"
 ```
 
-To handle interactions with the Redis instance, a new file (_redis_client.go_) was created in the rpc-server folder. To use Redis in Go, the module was imported from "github.com/redis/go-redis/v9". Documentation on the usage of Redis in Go can be found here: https://github.com/redis/go-redis. On startup, the RPC server will attempt to connect to the Redis instance on port 6379, via ```redis.NewClient(...)```.
+To handle interactions with the Redis instance, a new file (_redis_client.go_) was created in the rpc-server folder. To use Redis in Go, the module was imported from github.com/redis/go-redis/v9. Documentation on the usage of Redis in Go can be found here: https://github.com/redis/go-redis. On startup, the RPC server will attempt to connect to the Redis instance on port 6379, via ```redis.NewClient(...)```.
 
 SEND REQUEST
 1. To process a send request, a unique identifier must first be assigned to the request so that it can be retrieved later from the Redis instance. 
